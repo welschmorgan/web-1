@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Mendeleiev</title>
+	<style type="text/css">
+		.tooltip
+		{
+			position: relative;
+		}
+		.tooltip:hover:after
+		{
+			background: #333;
+			background: rgba(0,0,0,.8);
+			border-radius: 5px;
+			bottom: 26px;
+			color: #fff;
+			content: attr(title);
+			left: 20%;
+			padding: 5px 15px;
+			position: absolute;
+			z-index: 98;
+			width: 220px;
+		}
+		.tooltip:hover:before{
+			border: solid;
+			border-color: #333 transparent;
+			border-width: 6px 6px 0 6px;
+			bottom: 20px;
+			content: "";
+			left: 50%;
+			position: absolute;
+			z-index: 99;
+		}
+		.copyright
+		{
+			font-family: Monospace;
+			font-size: 10;
+			text-decoration: underline;
+			float: right;
+		}
+		.id{}
+		.header{text-align: center; vertical-align: center;border: 1px inset steelblue; background-color: lightsteelblue;}
+		.header:hover{background-color: black; color:white;}
+
+		.separator{height: 200px;}
+		.element{width: 70px; height: 70px; border: 1px solid black;}
+		.element:hover{background-color: black; color:white;}
+
+		.state_gas{font-weight: 900; color: red;}
+		.state_solid{font-weight: 900; color: black;}
+		.state_liquid{font-weight: 900; color: blue;}
+
+		.element_legend{color: black; text-align: center; vertical-align: center;font-family: Monospace; font-weight: 900; min-width: 150px;}
+		.element_metals_alcali{background-color: #AD3333; }
+		.element_earth_alcali{background-color: #FFCC99; }
+		.element_lantanids{background-color: #FFCCFF; }
+		.element_actinids{background-color: #CC99FF; }
+		.element_metals_transition{background-color: lightpink; }
+		.element_metals_poor{background-color: #B2B2FF;}
+		.element_metalloids{background-color: #C2A366;}
+		.element_non_metals{background-color: #66FF99;}
+		.element_hallogens{background-color: yellow;}
+		.element_noble_gas{background-color: #336699;}
+		.element_missing{border: 0px; background: transparent;}
+		.atom_num
+		{
+			float: left;
+			font-size: 5;
+		}
+		.atom_mass
+		{
+			float: right;
+			font-size: 5;
+		}
+		.atom_symbol
+		{
+			clear: both;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			font-size: 14;
+			font-weight: 900;
+		}
+	</style>
+</head>
+<body bgcolor=lightskyblue>
+	<!-- Pink BABA shit goes here -->
+	<center>
+		<h2 style="color: white;">Tableau periodique des elements</h2>
+
+		<ul style="list-style-type: none; width: 100px; float: left;">
+			<li>
+				<div class="element_metals_alcali element_legend">
+					Métaux alcalins
+				</div>
+			</li>
+			<li>
+				<div class="element_earth_alcali element_legend">
+					Alcalino-terreux
+				</div>
+			</li>
+			<li>
+				<div class="element_lantanids element_legend">
+					Lanthanides
+				</div>
+			</li>
+			<li>
+				<div class="element_actinids element_legend">
+					Actinides
+				</div>
+			</li>
+			<li>
+				<div class="element_metals_transition element_legend">
+					Métaux de transition
+				</div>
+			</li>
+			<li>
+				<div class="element_metals_poor element_legend">
+					Métaux pauvres
+				</div>
+			</li>
+			<li>
+				<div class="element_metalloids element_legend">
+					Mettalloids
+				</div>
+			</li>
+			<li>
+				<div class="element_non_metals element_legend">
+					Non-métaux
+				</div>
+			</li>
+			<li>
+				<div class="element_hallogens element_legend">
+					Halogènes
+				</div>
+			</li>
+			<li>
+				<div class="element_noble_gas element_legend">
+					Gaz nobles
+				</div>
+			</li>
+		</ul>
+		<table>
+		<tr>
+			<td class="element_missing"></td>
+			<td class="header">I</td>
+			<td class="header">II</td>
+			<td class="header">III</td>
+			<td class="header">IV</td>
+			<td class="header">V</td>
+			<td class="header">VI</td>
+			<td class="header">VII</td>
+			<td class="header">VIII</td>
+			<td class="header">IX</td>
+			<td class="header">X</td>
+			<td class="header">XI</td>
+			<td class="header">XII</td>
+			<td class="header">XIII</td>
+			<td class="header">XIV</td>
+			<td class="header">XV</td>
+			<td class="header">XVI</td>
+			<td class="header">XVII</td>
+			<td class="header">XVIII</td>
+		</tr>
+		<tr>
+			<td class="id header">1</td>
+			<td>
+				<div class="element element_non_metals state_gas tooltip" title="Hydrogène">
+					<div class="atom_mass">1</div>
+					<div class="atom_symbol">H</div>
+					<div class="atom_num">1</div>
+				</div>
+			</td>
+			<td colspan="16" class="element_missing"></td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="Hélium">
+					<div class="atom_mass">4</div>
+					<div class="atom_symbol">He</div>
+					<div class="atom_num">2</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="id header">2</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="Lithium">
+					<div class="atom_mass">6.9</div>
+					<div class="atom_symbol">Li</div>
+					<div class="atom_num">3</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="béryllium">
+					<div class="atom_mass">9</div>
+					<div class="atom_symbol">Be</div>
+					<div class="atom_num">4</div>
+				</div>
+			</td>
+			<td colspan="10" class="element_missing"></td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="bore">
+					<div class="atom_mass">10.8</div>
+					<div class="atom_symbol">B</div>
+					<div class="atom_num">5</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_non_metals state_solid tooltip" title="carbone">
+					<div class="atom_mass">12</div>
+					<div class="atom_symbol">C</div>
+					<div class="atom_num">6</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_non_metals state_gas tooltip" title="azote">
+					<div class="atom_mass">14</div>
+					<div class="atom_symbol">N</div>
+					<div class="atom_num">7</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_non_metals state_gas tooltip" title="oxygène">
+					<div class="atom_mass">16</div>
+					<div class="atom_symbol">O</div>
+					<div class="atom_num">8</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_gas tooltip" title="fluor">
+					<div class="atom_mass">19</div>
+					<div class="atom_symbol">F</div>
+					<div class="atom_num">9</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="néon">
+					<div class="atom_mass">20.2</div>
+					<div class="atom_symbol">Ne</div>
+					<div class="atom_num">10</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="id header">3</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="sodium">
+					<div class="atom_mass">23</div>
+					<div class="atom_symbol">Na</div>
+					<div class="atom_num">11</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="magnésium">
+					<div class="atom_mass">24.3</div>
+					<div class="atom_symbol">Mg</div>
+					<div class="atom_num">12</div>
+				</div>
+			</td>
+			<td colspan="10" class="element_missing"></td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="aluminium">
+					<div class="atom_mass">27</div>
+					<div class="atom_symbol">Al</div>
+					<div class="atom_num">13</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="silicium">
+					<div class="atom_mass">28.1</div>
+					<div class="atom_symbol">Al</div>
+					<div class="atom_num">14</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_non_metals state_solid tooltip" title="phosphore">
+					<div class="atom_mass">31</div>
+					<div class="atom_symbol">P</div>
+					<div class="atom_num">15</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_non_metals state_solid tooltip" title="souffre">
+					<div class="atom_mass">32.1</div>
+					<div class="atom_symbol">S</div>
+					<div class="atom_num">16</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_gas tooltip" title="chlore">
+					<div class="atom_mass">35.5</div>
+					<div class="atom_symbol">Cl</div>
+					<div class="atom_num">17</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="argon">
+					<div class="atom_mass">39.9</div>
+					<div class="atom_symbol">Ar</div>
+					<div class="atom_num">18</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="id header">4</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="potassium">
+					<div class="atom_mass">39.1</div>
+					<div class="atom_symbol">K</div>
+					<div class="atom_num">19</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="calcium">
+					<div class="atom_mass">40.1</div>
+					<div class="atom_symbol">Ca</div>
+					<div class="atom_num">20</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="scandium">
+					<div class="atom_mass">45</div>
+					<div class="atom_symbol">Sc</div>
+					<div class="atom_num">21</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="titane">
+					<div class="atom_mass">47.9</div>
+					<div class="atom_symbol">Ti</div>
+					<div class="atom_num">22</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="vanadium">
+					<div class="atom_mass">50.9</div>
+					<div class="atom_symbol">V</div>
+					<div class="atom_num">23</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="chrome">
+					<div class="atom_mass">52</div>
+					<div class="atom_symbol">Cr</div>
+					<div class="atom_num">24</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="manganèse">
+					<div class="atom_mass">54.9</div>
+					<div class="atom_symbol">Mn</div>
+					<div class="atom_num">25</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="fer">
+					<div class="atom_mass">55.8</div>
+					<div class="atom_symbol">Fe</div>
+					<div class="atom_num">26</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="cobalt">
+					<div class="atom_mass">58.9</div>
+					<div class="atom_symbol">Co</div>
+					<div class="atom_num">27</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="nickel">
+					<div class="atom_mass">58.7</div>
+					<div class="atom_symbol">Ni</div>
+					<div class="atom_num">28</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="cuivre">
+					<div class="atom_mass">63.5</div>
+					<div class="atom_symbol">Cu</div>
+					<div class="atom_num">29</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="zinc">
+					<div class="atom_mass">65.4</div>
+					<div class="atom_symbol">Zn</div>
+					<div class="atom_num">30</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="gallium">
+					<div class="atom_mass">69.7</div>
+					<div class="atom_symbol">Ga</div>
+					<div class="atom_num">31</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="germanium">
+					<div class="atom_mass">72.6</div>
+					<div class="atom_symbol">Ge</div>
+					<div class="atom_num">32</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="arsenic">
+					<div class="atom_mass">74.9</div>
+					<div class="atom_symbol">As</div>
+					<div class="atom_num">33</div>
+				</div>
+			</td>
+			<td>
+				<div class="element  element_non_metals state_solid tooltip" title="sélénium">
+					<div class="atom_mass">79</div>
+					<div class="atom_symbol">Se</div>
+					<div class="atom_num">34</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_liquid tooltip" title="brome">
+					<div class="atom_mass">79.9</div>
+					<div class="atom_symbol">Br</div>
+					<div class="atom_num">35</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="krypton">
+					<div class="atom_mass">83.8</div>
+					<div class="atom_symbol">Kr</div>
+					<div class="atom_num">36</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="id header">5</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="rubidium">
+					<div class="atom_mass">85.5</div>
+					<div class="atom_symbol">Rb</div>
+					<div class="atom_num">37</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="strontium">
+					<div class="atom_mass">87.6</div>
+					<div class="atom_symbol">Sr</div>
+					<div class="atom_num">38</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="yttrium">
+					<div class="atom_mass">88.9</div>
+					<div class="atom_symbol">Y</div>
+					<div class="atom_num">39</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="zirconium">
+					<div class="atom_num">40</div>
+					<div class="atom_symbol">Zr</div>
+					<div class="atom_mass">91.2</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="niobium">
+					<div class="atom_mass">92.9</div>
+					<div class="atom_symbol">Nb</div>
+					<div class="atom_num">41</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="molybdène">
+					<div class="atom_mass">96</div>
+					<div class="atom_symbol">Mo</div>
+					<div class="atom_num">42</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="technétium">
+					<div class="atom_mass">98</div>
+					<div class="atom_symbol">Tc</div>
+					<div class="atom_num">43</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="rhuthénium">
+					<div class="atom_mass">101.07</div>
+					<div class="atom_symbol">Ru</div>
+					<div class="atom_num">44</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="rhodium">
+					<div class="atom_mass">102.91</div>
+					<div class="atom_symbol">Rh</div>
+					<div class="atom_num">45</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="palladium">
+					<div class="atom_mass">106.4</div>
+					<div class="atom_symbol">Pd</div>
+					<div class="atom_num">46</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="argent">
+					<div class="atom_mass">107.9</div>
+					<div class="atom_symbol">Ag</div>
+					<div class="atom_num">47</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="cadmium">
+					<div class="atom_mass">112.41</div>
+					<div class="atom_symbol">Cd</div>
+					<div class="atom_num">48</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="indium">
+					<div class="atom_mass">114.8</div>
+					<div class="atom_symbol">In</div>
+					<div class="atom_num">49</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="étain">
+					<div class="atom_mass">118.7</div>
+					<div class="atom_symbol">Sn</div>
+					<div class="atom_num">50</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="antimoine">
+					<div class="atom_mass">121.8</div>
+					<div class="atom_symbol">Sb</div>
+					<div class="atom_num">51</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="tellure">
+					<div class="atom_mass">127.6</div>
+					<div class="atom_symbol">Te</div>
+					<div class="atom_num">52</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_solid tooltip" title="iode">
+					<div class="atom_mass">126.9</div>
+					<div class="atom_symbol">I</div>
+					<div class="atom_num">53</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="xénon">
+					<div class="atom_mass">131.3</div>
+					<div class="atom_symbol">Xe</div>
+					<div class="atom_num">54</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="id header">6</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="césium">
+					<div class="atom_mass">132.9</div>
+					<div class="atom_symbol">Cs</div>
+					<div class="atom_num">55</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="baryum">
+					<div class="atom_mass">137.3</div>
+					<div class="atom_symbol">Ba</div>
+					<div class="atom_num">56</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">&nbsp;</div>
+					<div class="atom_symbol">La-Lu</div>
+					<div class="atom_num">57-71</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="hafnium">
+					<div class="atom_mass">178.5</div>
+					<div class="atom_symbol">Hf</div>
+					<div class="atom_num">72</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="tantale">
+					<div class="atom_mass">181</div>
+					<div class="atom_symbol">Ta</div>
+					<div class="atom_num">73</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="tungstène">
+					<div class="atom_mass">183.8</div>
+					<div class="atom_symbol">W</div>
+					<div class="atom_num">74</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="rhénium">
+					<div class="atom_mass">186.2</div>
+					<div class="atom_symbol">Re</div>
+					<div class="atom_num">75</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="osmium">
+					<div class="atom_mass">190.2</div>
+					<div class="atom_symbol">Os</div>
+					<div class="atom_num">76</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="iridium">
+					<div class="atom_mass">192.2</div>
+					<div class="atom_symbol">Ir</div>
+					<div class="atom_num">77</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="platine">
+					<div class="atom_mass">195.1</div>
+					<div class="atom_symbol">Pt</div>
+					<div class="atom_num">78</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="or">
+					<div class="atom_mass">197</div>
+					<div class="atom_symbol">Au</div>
+					<div class="atom_num">79</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_liquid tooltip" title="mercure">
+					<div class="atom_mass">200.6</div>
+					<div class="atom_symbol">Hg</div>
+					<div class="atom_num">80</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="thallium">
+					<div class="atom_mass">204.4</div>
+					<div class="atom_symbol">TI</div>
+					<div class="atom_num">81</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="plomb">
+					<div class="atom_mass">207.2</div>
+					<div class="atom_symbol">Pb</div>
+					<div class="atom_num">82</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="bismuth">
+					<div class="atom_mass">209</div>
+					<div class="atom_symbol">Bi</div>
+					<div class="atom_num">83</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metalloids state_solid tooltip" title="polonium">
+					<div class="atom_mass">209</div>
+					<div class="atom_symbol">Po</div>
+					<div class="atom_num">84</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_solid tooltip" title="astate">
+					<div class="atom_mass">210</div>
+					<div class="atom_symbol">At</div>
+					<div class="atom_num">85</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_gas tooltip" title="radon">
+					<div class="atom_mass">222</div>
+					<div class="atom_symbol">Rn</div>
+					<div class="atom_num">86</div>
+				</div>
+			</td>
+		<tr>
+			<td class="id header">7</td>
+			<td>
+				<div class="element element_metals_alcali state_solid tooltip" title="francium">
+					<div class="atom_mass">223</div>
+					<div class="atom_symbol">Fr</div>
+					<div class="atom_num">87</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_earth_alcali state_solid tooltip" title="radium">
+					<div class="atom_mass">226</div>
+					<div class="atom_symbol">Ra</div>
+					<div class="atom_num">88</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid">
+					<div class="atom_mass">&nbsp;</div>
+					<div class="atom_symbol">Ac-Lr</div>
+					<div class="atom_num">89 - 103</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="rutherfordium">
+					<div class="atom_mass">267</div>
+					<div class="atom_symbol">Rf</div>
+					<div class="atom_num">104</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="dubnium">
+					<div class="atom_mass">268</div>
+					<div class="atom_symbol">Db</div>
+					<div class="atom_num">105</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="seaborgium">
+					<div class="atom_mass">271</div>
+					<div class="atom_symbol">Sg</div>
+					<div class="atom_num">106</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="bohrium">
+					<div class="atom_mass">272</div>
+					<div class="atom_symbol">Bh</div>
+					<div class="atom_num">107</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="hassium">
+					<div class="atom_mass">277</div>
+					<div class="atom_symbol">Hs</div>
+					<div class="atom_num">108</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="meitnérium">
+					<div class="atom_mass">276</div>
+					<div class="atom_symbol">Mt</div>
+					<div class="atom_num">109</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="darmstadtium">
+					<div class="atom_mass">281</div>
+					<div class="atom_symbol">Ds</div>
+					<div class="atom_num">110</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition state_solid tooltip" title="roentgenium">
+					<div class="atom_mass">280</div>
+					<div class="atom_symbol">Rg</div>
+					<div class="atom_num">111</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_transition element_metals_transition state_gas tooltip" title="copernicium">
+					<div class="atom_mass">285</div>
+					<div class="atom_symbol">Cn</div>
+					<div class="atom_num">112</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="ununtrium">
+					<div class="atom_mass">284</div>
+					<div class="atom_symbol">Uut</div>
+					<div class="atom_num">113</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="flérovium">
+					<div class="atom_mass">289</div>
+					<div class="atom_symbol">Fl</div>
+					<div class="atom_num">114</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="ununpentium">
+					<div class="atom_mass">288</div>
+					<div class="atom_symbol">Uup</div>
+					<div class="atom_num">115</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_metals_poor state_solid tooltip" title="livermorium">
+					<div class="atom_mass">292</div>
+					<div class="atom_symbol">Lv</div>
+					<div class="atom_num">116</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_hallogens state_solid tooltip" title="ununseptium">
+					<div class="atom_mass">117</div>
+					<div class="atom_symbol">Uus</div>
+					<div class="atom_num">117</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_noble_gas state_solid tooltip" title="ununoctium">
+					<div class="atom_mass">294</div>
+					<div class="atom_symbol">Uuo</div>
+					<div class="atom_num">118</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="element_missing"></td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="lanthane">
+					<div class="atom_mass">138.9</div>
+					<div class="atom_symbol">La</div>
+					<div class="atom_num">57</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="cérium">
+					<div class="atom_mass">140.1</div>
+					<div class="atom_symbol">Ce</div>
+					<div class="atom_num">58</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="praséodyme">
+					<div class="atom_mass">140.9</div>
+					<div class="atom_symbol">Pr</div>
+					<div class="atom_num">59</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="néodyme">
+					<div class="atom_mass">144.2</div>
+					<div class="atom_symbol">Nd</div>
+					<div class="atom_num">60</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="prométhium">
+					<div class="atom_mass">144.9</div>
+					<div class="atom_symbol">Pm</div>
+					<div class="atom_num">61</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="samarium">
+					<div class="atom_mass">150.36</div>
+					<div class="atom_symbol">Sm</div>
+					<div class="atom_num">62</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="europium">
+					<div class="atom_mass">152</div>
+					<div class="atom_symbol">Eu</div>
+					<div class="atom_num">63</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="galodinium">
+					<div class="atom_mass">157.25</div>
+					<div class="atom_symbol">Gd</div>
+					<div class="atom_num">64</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="terbium">
+					<div class="atom_mass">158.9</div>
+					<div class="atom_symbol">Tb</div>
+					<div class="atom_num">65</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="dysprossium">
+					<div class="atom_mass">162.5</div>
+					<div class="atom_symbol">Dy</div>
+					<div class="atom_num">66</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="holmium">
+					<div class="atom_mass">164.9</div>
+					<div class="atom_symbol">Ho</div>
+					<div class="atom_num">67</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="erbium">
+					<div class="atom_mass">167.3</div>
+					<div class="atom_symbol">Er</div>
+					<div class="atom_num">68</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="thulium">
+					<div class="atom_mass">168.9</div>
+					<div class="atom_symbol">Tm</div>
+					<div class="atom_num">69</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="ytterbium">
+					<div class="atom_mass">173</div>
+					<div class="atom_symbol">Yb</div>
+					<div class="atom_num">70</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_actinids state_solid tooltip" title="lutécium">
+					<div class="atom_mass">175</div>
+					<div class="atom_symbol">Lu</div>
+					<div class="atom_num">71</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="element_missing"></td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">227.0</div>
+					<div class="atom_symbol">Ac</div>
+					<div class="atom_num">89</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">232</div>
+					<div class="atom_symbol">Th</div>
+					<div class="atom_num">90</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">231</div>
+					<div class="atom_symbol">Pa</div>
+					<div class="atom_num">91</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">238</div>
+					<div class="atom_symbol">U</div>
+					<div class="atom_num">92</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">237</div>
+					<div class="atom_symbol">Np</div>
+					<div class="atom_num">93</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">244</div>
+					<div class="atom_symbol">Pu</div>
+					<div class="atom_num">94</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">243.1</div>
+					<div class="atom_symbol">Am</div>
+					<div class="atom_num">95</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">247.1</div>
+					<div class="atom_symbol">Cm</div>
+					<div class="atom_num">96</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">247.1</div>
+					<div class="atom_symbol">Bk</div>
+					<div class="atom_num">97</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">251.1</div>
+					<div class="atom_symbol">Cf</div>
+					<div class="atom_num">98</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">252.1</div>
+					<div class="atom_symbol">Es</div>
+					<div class="atom_num">99</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">257.1</div>
+					<div class="atom_symbol">Fm</div>
+					<div class="atom_num">100</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">258.1</div>
+					<div class="atom_symbol">Md</div>
+					<div class="atom_num">101</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">259.1</div>
+					<div class="atom_symbol">No</div>
+					<div class="atom_num">102</div>
+				</div>
+			</td>
+			<td>
+				<div class="element element_lantanids state_solid">
+					<div class="atom_mass">262.1</div>
+					<div class="atom_symbol">Lr</div>
+					<div class="atom_num">103</div>
+				</div>
+			</td>
+		</tr>
+		</table>
+		<img src="http://1.bp.blogspot.com/_ADgpLyICxqw/TLtaLaq29LI/AAAAAAAAAAM/eYK9S8iYJGY/s1600/20070924klpcnafyq_71.Ies.SCO.jpg">
+		<hr />
+		<span class="copyright">© mwelsch 2014</span>
+	</center>
+</body>
+</html>

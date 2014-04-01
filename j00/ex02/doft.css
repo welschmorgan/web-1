@@ -1,0 +1,36 @@
+html, body{ background-color: #505050; border: 0px; margin: 0px; padding: 0px; }
+
+.left{float: left;}
+.right{float: right;}
+
+.block
+{
+	border-radius: 10px;
+	box-shadow: 10px 10px 10px black;
+	background-color: #909090;
+}
+
+.banner, .banner img
+{
+	height: 117px;
+}
+
+.banner
+{
+	margin: 18px auto 20px auto;
+	width: 1400px;
+	padding: 10px;
+	position: relative;
+	max-width: 1400px;
+}
+
+.tool, .tool img
+{
+	width: 20px;
+	height: 20px;
+}
+
+.main_div
+{
+	margin: 18px auto 20px auto;
+}

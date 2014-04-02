@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$out = "$HOME/piscine/web-1/"
+out = "$HOME/piscine/web-1/"
 mkdir -p "$out"
 mv j01 "$out"
 mv j02 "$out"

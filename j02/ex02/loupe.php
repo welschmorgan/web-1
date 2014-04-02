@@ -12,13 +12,13 @@
 		}
 		fclose($handle);
 
-		$pattern = '/<a(.*?)title=[\"|\']+(.*?)[\"|\']+(.*?)>(.*?)<\/a>/i';
+		$pattern = '/<(.*?)title=[\"|\']+(.*?)[\"|\']+(.*?)>(.*?)<\/(.*?)>/i';
 		echo preg_replace_callback($pattern, 'hashtag_to_link', $content);
 	}
 
 	function hashtag_to_link($matches)
 	{
-	  return '<a' . $matches[1] . 'title="' . strtoupper($matches[2]) . '"' . $matches[3] . '>' . strtoupper($matches[4]) . '</a>';
+	  return '<' . $matches[1] . 'title="' . strtoupper($matches[2]) . '"' . $matches[3] . '>' . strtoupper($matches[4]) . '</' . $matches[5] . '>';
 	}
 	if (isset($argv[1]))
 		parse_page($argv[1]);

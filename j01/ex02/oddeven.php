@@ -8,10 +8,7 @@ function	ask_input(&$input)
 	$input = "";
 	$line = fgets($handle);
 	if (empty($line))
-	{
-		echo "User quitting ...\n";
 		exit (1);
-	}
 	$line = trim($line);
 	$num = is_numeric($line);
 	if (!$num && empty($line))

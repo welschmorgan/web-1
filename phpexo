@@ -1,0 +1,16 @@
+#!/usr/bin/zsh
+
+function usage
+{
+	echo "Usage: $0 exercise_name exercise_main_file"
+	exit 1
+}
+
+if [[ -z $1 || -z $2 ]]; then
+	usage
+fi
+mkdir "$1"
+cd "$1"
+touch "$2"
+chmod 755 "$2"
+git add "$2"

@@ -1,0 +1,58 @@
+body, html
+{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+}
+body
+{
+	min-height: 600px;
+	height: 600px;
+	max-width:1280px;
+	margin: auto;
+	background-color: #475f77;
+}
+a { width: 100%; color: black; text-decoration: underline; }
+a:hover { background-color: #989898; color: aliceblue; text-decoration: none; }
+
+/*
+** The base style for all blocks
+** every class in this site will inherit this
+*/
+.block
+{
+	background-color: #354b5e;
+	box-shadow: 0px 2px 0px 0px;
+	border-radius: 10px;
+	border: 1px inset #475f77;
+	position: relative;
+	margin: 5px;
+	padding: 5px;
+}
+
+.content
+{
+	width: 100%;
+	vertical-align:
+	top; margin: 0px;
+	padding: 5px;
+	position: relative;
+	min-height: 900px;
+	max-height: 1000px;
+	max-width: 1680;
+	height: 650px;
+	overflow: auto;
+}
+
+header {
+	font-size: 40px;
+	color: black;
+	text-align: center;
+}
+
+footer
+{
+	position: fixed;
+	bottom: 0px;
+}

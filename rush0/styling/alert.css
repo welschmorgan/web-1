@@ -1,0 +1,37 @@
+.alert
+{
+	position: relative;
+	min-width: 250px;
+	margin: auto;
+	padding: 20px;
+	display: inline-block;
+	font-weight: bolder;
+	font-family: Monospace;
+	font-size: 10;
+	border-radius: 15px;
+	border: 1px solid black;
+	text-align: left;
+	vertical-align: center;
+	opacity: 0.75;
+}
+
+.alert-error
+{
+	background-color: #FF704D;
+	color: #990000;
+	border-color: #990000;
+}
+
+.alert-success
+{
+	background-color: #99D6AD;
+	color: #336600;
+	border-color: #336600;
+}
+
+.alert-info
+{
+	background-color: #99B2FF;
+	color: #003D99;
+	border-color: #003D99;
+}

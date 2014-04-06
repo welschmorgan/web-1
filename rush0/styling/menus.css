@@ -1,0 +1,4 @@
+.menu { min-width: 150px; vertical-align: top; height: 150px; max-height: 250px;}
+.menu ul { list-style-type: none; margin: 0px; padding: 0px; }
+.menu ul li { width: 100%; text-align: center; }
+.menu ul li:hover { background-color: #989898; color: #AAAAAA;}

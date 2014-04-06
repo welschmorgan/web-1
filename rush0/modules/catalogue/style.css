@@ -1,0 +1,36 @@
+.product_image
+{
+	width: 96px;
+	height: 96px;
+}
+
+
+.product_row
+{
+	background-color: #525252;
+}
+
+.product_table
+{
+	background-color: #222222;
+	min-height: 500px;
+	max-height: 550px;
+	overflow: auto;
+}
+
+.product_row td
+{
+	text-align: center;
+	vertical-align: center;
+}
+
+.product_header
+{
+	background-color: #222222;
+}
+
+.product_header td
+{
+	text-align: center;
+	vertical-align: center;
+}

@@ -1,0 +1,24 @@
+.basket_header
+{
+	background-color: #475F77;
+	width: 100%;
+}
+
+.basket_row
+{
+	background-color: #354b5e;
+	border: 0px;
+	width: 100%;
+}
+
+.basket_row td
+{
+	text-align: center;
+}
+
+.basket
+{
+	min-width: 300px;
+	margin: auto;
+	background-color: #475F77;
+}

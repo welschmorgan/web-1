@@ -1,0 +1,36 @@
+/**
+ * Navbar, top of mainpage
+ */
+.navbar ul
+{
+	list-style-type: none;
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+	/*
+	padding-top: 5px;
+	padding-bottom: 5px;
+	*/
+}
+
+.navbar ul li
+{
+	display: inline-block;
+	margin: 5px 5px 5px 5px;
+}
+
+.navbar ul li ul
+{
+	list-style-type: none;
+	display: none;
+	padding: 0px;
+	margin: 0px;
+	position: relative;
+	background-color: #424242;
+}
+
+.navbar ul li ul li
+{
+	display: inline-block;
+	margin: 0px;
+}

@@ -1,0 +1,16 @@
+/*
+** Style global
+*/
+::-webkit-input-placeholder { color:darkslategrey; }
+::-moz-placeholder { color:darkslategrey; } /* firefox 19+ */
+:-ms-input-placeholder { color:darkslategrey; } /* ie */
+input:-moz-placeholder { color:darkslategrey; }
+form{clear: both; width: 90%; margin: auto; overflow-x: hidden; overflow-y: auto;}
+form button{ border-radius: 10px; background-color: #323232; color: #989898; padding: 10px; }
+form input, .input
+{
+	width: 100%;
+	background-color: #989898;
+	border: 1px inset #AAAAAA;
+	color: #323232;
+}

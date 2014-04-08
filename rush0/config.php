@@ -2,7 +2,7 @@
 	$_GLOBALS['config']['site']['title'] = "Éléonore & Morgan's Shop";
 	$_GLOBALS['config']['mysql']['host'] = "localhost";
 	$_GLOBALS['config']['mysql']['user'] = "root";
-	$_GLOBALS['config']['mysql']['pass'] = "Moflomoflo14240";
+	$_GLOBALS['config']['mysql']['pass'] = "amXXQ4ctr59U7PNb";
 	$_GLOBALS['config']['mysql']['db'] = "rush-0";
 	if (isset($_SESSION['basket']))
 	{

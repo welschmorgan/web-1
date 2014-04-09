@@ -1,12 +1,12 @@
 <?php
 class Color
 {
-	var $red;
-	var $green;
-	var $blue;
+	public $red;
+	public $green;
+	public $blue;
 	public static $verbose = False;
 
-	public function __construct($color = NULL)
+	public function __construct(array $color = NULL)
 	{
 		if (isset($color))
 		{
@@ -32,9 +32,6 @@ class Color
 
 	public function sanitize()
 	{
-		$this->red = intval($this->red);
-		$this->green = intval($this->green);
-		$this->blue = intval($this->blue);
 		$this->red = ($this->red > 255
 						? 255
 						: ($this->red < 0
@@ -90,29 +87,28 @@ class Color
 			switch($op)
 			{
 				case '+':
-					$ret['red'] += intval($other->red);
-					$ret['green'] += intval($other->green);
-					$ret['blue'] += intval($other->blue);
+					$ret['red'] += $other->red;
+					$ret['green'] += $other->green;
+					$ret['blue'] += $other->blue;
 				break;
 				case '-':
-					$ret['red'] -= intval($other->red);
-					$ret['green'] -= intval($other->green);
-					$ret['blue'] -= intval($other->blue);
+					$ret['red'] -= $other->red;
+					$ret['green'] -= $other->green;
+					$ret['blue'] -= $other->blue;
 				break;
 				case '*':
-					$this->red *= floatval($other);
-					$this->green *= floatval($other);
-					$this->blue *= floatval($other);
-					return ($this->sanitize());
+					$ret['red'] *= $other;
+					$ret['green'] *= $other;
+					$ret['blue'] *= $other;
 				break;
 				default:
 			}
 		}
 		return (new Color($ret));
 	}
-	public function add($other)
+	public function add(Color $other)
 	{ return ($this->op('+', $other));}
-	public function sub($other)
+	public function sub(Color $other)
 	{ return ($this->op('-', $other));}
 	public function mult($other)
 	{ return ($this->op('*', $other));}

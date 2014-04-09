@@ -10,6 +10,4 @@ color, Color (see Color.doc.txt for documentation on this class)
 
 new Vector( array( 'x' => 0, 'y' => 255, 'z' => 0, 'w' => 1, 'color' => new Color(array('red' => 255, 'green' => 255, 'blue' => 255)) ) );
 
-This class offers the following functions:
-	-
 ---------------------------------------------------------------------- Vector ->

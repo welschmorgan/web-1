@@ -1,0 +1,254 @@
+#!/bin/bash
+
+function print_error
+{
+	printf "\033[K\033[1;32m[---- %s ----]\033[0m\n" "$@"
+}
+
+function print_info
+{
+	printf "\033[K\033[1;34m[---- %s ----]\033[0m\n" "$@"
+}
+
+function print_info_step
+{
+	printf "\033[K\033[0;34m[+]\t%s\033[0m\n" "$@"
+}
+
+function print_error_step
+{
+	printf "\033[K\033[0;32m[-]\t%s\033[0m\n" "$@"
+}
+
+function usage
+{
+	print_error "Usage: $0 vhost_name [vhost_htdocs_repository]"
+	exit 1
+}
+
+function find_mamp
+{
+	while [ ! -e $MAMP_DIR ]; do
+		print_info "Cannot find MAMP installation dir."
+		read -e -i "$MAMP_DIR" -p "Path: " input
+		MAMP_DIR="${input:-$MAMP_DIR}"
+	done
+}
+
+function find_apache2
+{
+	while [ ! -e "$APACHE2_DIR/apache2.conf" ]; do
+		print_info "Cannot find Apache2 installation dir (location of apache2.conf)."
+		read -e -i "$APACHE2_DIR" -p "Path: " input
+		APACHE2_DIR="${input:-$APACHE2_DIR}"
+	done
+}
+
+function input_new_app
+{
+	if [ $FORCED_APP_NAME == 0 ]; then
+		print_info "NEW_APP"
+		read -e -i "$APP_NAME" -p "Path:" input
+		APP_NAME="${input:-$APP_NAME}"
+		while [ -e "$MAMP_DIR/apps/$APP_NAME" ]; do
+			print_info "NEW_APP"
+			read -e -i "$APP_NAME" -p "Path: " input
+			APP_NAME="${input:-$APP_NAME}"
+		done
+	else
+		print_info "App name: $APP_NAME."
+	fi
+}
+
+function input_install_dir
+{
+	while [[ -z $INSTALL_DIR || ! -e $INSTALL_DIR ]]; do
+		print_error "Invalid installation directory '$INSTALL_DIR'"
+		read -e -i "$INSTALL_DIR" -p "Path (app's parent folder):" input
+		INSTALL_DIR="${input:-$INSTALL_DIR}"
+	done
+}
+
+function validate_install
+{
+	OK=0
+	while [ $OK != 1 ]; do
+		print_info "Validate Installation"
+		input_install_dir
+		print_info_step "Will create :"
+		if [ $DISABLE_MAMP == 1 ]; then
+			while [ -e "$APACHE2_DIR/sites-available/$APP_NAME" ]; do
+				print_error_step "VHOST '$APACHE2_DIR/sites-available/$APP_NAME' already exist:"
+				read -e -p "(R)emove, (C)hange name, (A)bort" input
+				if [[ $input == "R" || $input == "r" ]]; then
+					echo "Removing '$APACHE2_DIR/sites-available/$APP_NAME'"
+					sudo rm -f "$APACHE2_DIR/sites-available/$APP_NAME"
+				elif [[ $input == "C" || $input == "c" ]]; then
+					read -e -i "$APP_NAME" -p "New app's name: " input
+					APP_NAME="${input:-$APP_NAME}"
+				elif [[ $input == "A" || $input == "a" ]]; then
+					print_error_step "Aborting ..."
+					exit 3
+				fi
+			done
+			print_info_step "$APACHE2_DIR/sites-available/$APP_NAME (vhost file)"
+		else
+			print_info_step "$MAMP_DIR/apps/$APP_NAME/conf (vhost files)"
+			print_info_step "$MAMP_DIR/apps/$APP_NAME/htdocs (webapp's root folder)"
+		fi
+		print_info_step "$INSTALL_DIR/$APP_NAME (web app's root folder)"
+		read -e -p "Everything ok ? [Y|n] " input
+		if [[ $input == "Y" || $input == "y" ]]; then
+			OK=1
+		fi
+	done
+}
+
+function install_mamp_vhost
+{
+	if [ $FORCED_INSTALL_DIR == 0 ]; then
+		INSTALL_DIR="$INSTALL_DIR/apps"
+	fi
+	print_info "Installing MAMP vhost [$INSTALL_DIR]..."
+	validate_install
+	if [ ! -e $INSTALL_DIR/$APP_NAME ]; then
+		print_error "Directory does not exist, creating $INSTALL_DIR/$APP_NAME."
+		mkdir -p $INSTALL_DIR/$APP_NAME
+	fi
+}
+
+function install_apache2_vhost
+{
+	if [ $FORCED_INSTALL_DIR == 0 ]; then
+		INSTALL_DIR="$BASE_DIR"
+	fi
+	print_info "Installing Apache2 vhost [$INSTALL_DIR]..."
+	validate_install
+	if [ ! -e $INSTALL_DIR/$APP_NAME ]; then
+		print_error "Directory does not exist, creating $INSTALL_DIR/$APP_NAME."
+		mkdir -p $INSTALL_DIR/$APP_NAME
+	fi
+	SERVER_NAME="$APP_NAME.local.42.fr"
+	read -e -i "$SERVER_NAME" -p "ServerName for this vhost (url): " input
+	SERVER_NAME="${input:-$SERVER_NAME}"
+	BASE_DIR2="$APACHE2_DIR/sites-available/$APP_NAME";
+	sudo touch "$BASE_DIR2"
+	VHOST_FILE=`mktemp -t XXXXXX.vhost`
+	INDEX_FILE=`mktemp -t XXXXXX.index`
+	echo "<VirtualHost *:80>
+	ServerAdmin `whoami`@student.42.fr
+	ServerName $SERVER_NAME
+	ServerAlias www.$SERVER_NAME
+
+	DocumentRoot $INSTALL_DIR/$APP_NAME
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride All
+	</Directory>
+	<Directory $INSTALL_DIR/$APP_NAME/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	<Directory \"/usr/lib/cgi-bin\">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	ErrorLog \${APACHE_LOG_DIR}/${APP_NAME}_error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,\
+	# alert, emerg
+	LogLevel warn
+
+	CustomLog \${APACHE_LOG_DIR}/${APP_NAME}_access.log combined
+</VirtualHost>" > "$VHOST_FILE"
+	echo "<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			My Cool Website
+		</title>
+	<body>
+		<?php echo \"My lover's name is PHP, and yours ?\"; ?>
+	</body>
+</html>" > "$INDEX_FILE"
+	print_info_step "Created host file $VHOST_FILE"
+	print_info_step "Created index file $INDEX_FILE"
+	print_info_step "Setting permissions to 644 (rw-r-r)"
+	sudo chmod 644 "$INDEX_FILE"
+	sudo chmod 644 "$INSTALL_DIR/$APP_NAME"
+	print_info_step "Moving vhost file to '$BASE_DIR2'"
+	sudo mv "$VHOST_FILE" "$BASE_DIR2"
+	print_info_step "Moving index file to '$INSTALL_DIR/$APP_NAME/index.php'"
+	sudo mv "$INDEX_FILE" "$INSTALL_DIR/$APP_NAME/index.php"
+	print_info_step "Changing ownership of '$INSTALL_DIR/$APP_NAME' to '`whoami`:www-data'"
+	sudo chown -R `whoami`:www-data "$INSTALL_DIR/$APP_NAME"
+	print_info_step "Enabling virtual host"
+	sudo a2ensite $APP_NAME
+	print_info_step "Reloading apache2 configuration"
+	sudo service apache2 reload
+}
+
+function install_vhost
+{
+
+	if [ $DISABLE_MAMP == 0 ]; then
+		find_mamp
+	else
+		find_apache2
+	fi
+	input_new_app
+	if [ $DISABLE_MAMP == 0 ]; then
+		install_mamp_vhost
+	else
+		install_apache2_vhost
+	fi
+}
+
+
+BASE_DIR=$HOME
+MAMP_DIR=$BASE_DIR/mamp
+APACHE2_DIR=/etc/apache2
+APP_NAME='my_app' # default app name
+
+INSTALL_DIR=''
+FORCED_INSTALL_DIR=0 # set to 1 if --dir given
+DISABLE_MAMP=0 # set to 1 if --nomamp given (userful if you are not using mamp shit ...)
+GIT_CLONE_DIR=0 # set to 1 if --git option given (clone from repository)
+FORCED_APP_NAME=0 # set to 1 if --name option given (set app name)
+
+for i in "$@"
+do
+	case $i in
+		-v|--verbose)
+			VERBOSE=1
+		;;
+		-n=*|--name=*)
+			APP_NAME="${i#*=}"
+			FORCED_APP_NAME=1
+		;;
+		-d=*|--dir=*|--path=*)
+			INSTALL_DIR="${i#*=}"
+			FORCED_INSTALL_DIR=1
+		;;
+		--nomamp)
+			DISABLE_MAMP=1
+		;;
+		-g=*|-r=*|--repo=*|--git=*)
+			GIT_DIR="${i#*=}"
+			GIT_CLONE_DIR=1
+		;;
+		*)
+			print_error "Unknown parameter given $OPTARG"
+			exit 1
+		;;
+	esac
+done
+
+install_vhost

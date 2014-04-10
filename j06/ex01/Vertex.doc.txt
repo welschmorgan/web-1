@@ -1,0 +1,15 @@
+<- Vertex ----------------------------------------------------------------------
+The Vertex class handles points in 3d space.
+
+This class can be constructed using an array with the following keys recognised:
+x, float
+y, float,
+z, float,
+w, float,
+color, Color (see Color.doc.txt for documentation on this class)
+
+new Vertex( array( 'x' => 0, 'y' => 255, 'z' => 0, 'w' => 1, 'color' => new Color(array('red' => 255, 'green' => 255, 'blue' => 255)) ) );
+
+This class offers the following functions:
+	-
+---------------------------------------------------------------------- Vertex ->

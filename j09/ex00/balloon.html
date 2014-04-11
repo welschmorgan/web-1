@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+			.balloon
+			{
+				background-color: red;
+				border-radius: 100%;
+				width: 200px;
+				height: 200px;
+				margin: auto;
+				padding: auto;
+			}
+		</style>
+		<script type="text/javascript">
+			function get_element(id)
+			{
+				if (document && document.getElementById)
+					return (document.getElementById(id))
+				else
+					console.warn('document.getElementById, method cannot be found, use better browser you fool.');
+				return (null);
+			}
+
+			function Balloon()
+			{
+				var cur_size;
+				var min_size;
+				var max_size;
+				var step_size;
+				var element;
+				var color;
+				var Colors = {
+					Red : {value: 0, name: "red"},
+					Green: {value: 1, name: "green"},
+					Blue : {value: 2, name: "blue"}
+				};
+				this.capture = function(id)
+				{
+					this.element = get_element(id);
+					if (!this.element)
+						console.warn("Invalid balloon id '" + id + "'.");
+				}
+				this.getSize = function()
+				{
+					return (this.cur_size);
+				}
+				this.setSize = function(size)
+				{
+					this.cur_size = size;
+				}
+				this.grow = function()
+				{
+					if ((this.getSize() + this.step_size) <= this.max_size)
+						this.setSize(this.getSize() + this.step_size);
+					else
+						this.explode();
+					this.realize(true);
+				}
+				this.deflate = function()
+				{
+					if ((this.getSize() - this.step_size) >= this.min_size)
+						this.setSize(this.getSize() - (this.step_size / 2));
+					this.realize(false);
+				}
+				this.explode = function()
+				{
+					this.setSize(this.min_size);
+					this.realize(false);
+				}
+				this.realize = function(do_color)
+				{
+					if (this.element)
+					{
+						if (do_color)
+						{
+							switch (this.color)
+							{
+								case Colors.Blue:
+									this.color = Colors.Red;
+								break;
+								case Colors.Green:
+									this.color = Colors.Blue;
+								break;
+								case Colors.Red:
+								default:
+									this.color = Colors.Green;
+							}
+						}
+						this.element.setAttribute('style', 'width: ' + this.cur_size + 'px; height: ' + this.cur_size + 'px; background-color: ' + this.color.name + ';');
+					}
+				}
+				this.element = null;
+				this.min_size = 200;
+				this.max_size = 420;
+				this.step_size = 10;
+				this.cur_size = this.min_size;
+				this.color = Colors.Red;
+			}
+		</script>
+	</head>
+	<body>
+		<div
+			id="balloon"
+			class="balloon"
+			onclick="oballoon.grow();"
+			onmouseleave="oballoon.deflate();"
+		>
+		</div>
+		<!--
+			Document on ready method without jquery !
+		-->
+		<script type='text/javascript'>
+		(function() {
+			oballoon = new Balloon();
+			oballoon.capture('balloon');
+		})();
+		</script>
+	</body>
+</html>

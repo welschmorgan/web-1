@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css" media="screen">
+			#result
+			{
+				width: 75%;
+				height: 18px;
+				position: relative;
+				float: left;
+				border: 1px dashed darkgreen;
+				margin: 0px;
+				padding: 0px;
+			}
+			.fit
+			{
+				margin: 0px;
+				padding: 0px;
+			}
+			#calc
+			{
+				width: 500px;
+				height: 300px;
+				min-width: 500px;
+				max-width: 750px;
+				margin: auto;
+				position: relative;
+			}
+			#submit-block
+			{
+				position: relative;
+				width: 100%;
+				display: inline-block;
+			}
+			#submit
+			{
+				float: right;
+			}
+
+			.right{float: right;}
+			.left{float: right;}
+			.center{text-align: center;}
+			.vcenter{text-align: center;}
+			.block{display: block;}
+			.inline{display: inline-block;}
+			.bold{font-weight: 900;}
+			.underline{text-decoration: underline;}
+			.vcenter{text-align: center;}
+
+			.operand
+			{
+				width: 200px;
+			}
+			.operator
+			{
+				width: 90px;
+			}
+		</style>
+		<script type="text/javascript">
+			function get_element(id)
+			{
+				if (document && document.getElementById)
+					return (document.getElementById(id))
+				else
+					console.warn('document.getElementById, method cannot be found, use better browser you fool.');
+				return (null);
+			}
+			function calc_result(lop_id, rop_id, op_id, res_id)
+			{
+				var lop = get_element(lop_id);
+				var op = get_element(op_id);
+				var rop = get_element(rop_id);
+				var res = get_element(res_id);
+				if (!lop.value || !rop.value || !res || !op)
+					alert('Error :(');
+				else
+				{
+					switch(op.options[op.selectedIndex].value)
+					{
+						case '/': case '%':
+						{
+							if (lop.value == '0' || rop.value == '0')
+							{
+								alert("It's over 9000!");
+								console.log("It's over 9000!");
+								break;
+							}
+						}
+						default:
+							var r = eval(lop.value + op.options[op.selectedIndex].value + rop.value);
+							console.log(r);
+							res.innerHTML = r;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id='calc' class='fit'>
+			<div class='fit inline'>
+			<input id="left_operand" class="fit operand left" type="text" placeholder="left operand">
+			<select id="operator" class="operator left" placeholder="operator">
+				<option>
+					+
+				</option>
+				<option>
+					-
+				</option>
+				<option>
+					*
+				</option>
+				<option>
+					/
+				</option>
+				<option>
+					%
+				</option>
+			</select>
+			<input id="right_operand" class="fit operand left" type="text" placeholder="right operand">
+			</div>
+			<br>
+			<div id='submit-block' class='fit'>
+				<div id='result' class='fit left'></div>
+				<input
+					id="submit"
+					type="submit"
+					value="Try me!"
+					onclick="calc_result('left_operand', 'right_operand', 'operator', 'result');";
+				>
+			</div>
+		</div>
+		<script style='text/javascript'>
+		window.setInterval("alert('Please, use me...');", 30000);
+		</script>
+	</body>
+</html>

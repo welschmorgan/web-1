@@ -1,0 +1,9 @@
+<-- Point
+-------------------------------------------------------------------------------
+This class provides basic support of a point in 2d space,
+operators are add, sub, div, mul, mod
+private vars are _x, _y
+accessors are set{X,Y,} to write data
+accessors are get{X,Y} to read data
+-------------------------------------------------------------------------------
+Point -->

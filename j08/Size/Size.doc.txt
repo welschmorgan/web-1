@@ -1,0 +1,9 @@
+<-- Size
+-------------------------------------------------------------------------------
+This class provides basic support of a size in 2d space,
+operators are add, sub, div, mul, mod
+private vars are _width, _height
+accessors are set{Width,Height,} to write data
+accessors are get{Width,Height} to read data
+-------------------------------------------------------------------------------
+Size -->

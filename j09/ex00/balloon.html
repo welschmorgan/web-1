@@ -55,13 +55,41 @@
 						this.setSize(this.getSize() + this.step_size);
 					else
 						this.explode();
+
+					switch (this.color)
+					{
+						case Colors.Blue:
+							this.color = Colors.Red;
+						break;
+						case Colors.Green:
+							this.color = Colors.Blue;
+						break;
+						case Colors.Red:
+						default:
+							this.color = Colors.Green;
+					}
 					this.realize(true);
 				}
 				this.deflate = function()
 				{
 					if ((this.getSize() - this.step_size) >= this.min_size)
+					{
 						this.setSize(this.getSize() - (this.step_size / 2));
-					this.realize(false);
+						switch (this.color)
+						{
+							case Colors.Blue:
+								this.color = Colors.Green;
+							break;
+							case Colors.Green:
+								this.color = Colors.Red;
+							break;
+							case Colors.Red:
+							default:
+								this.color = Colors.Blue;
+						}
+					}
+
+					this.realize(true);
 				}
 				this.explode = function()
 				{
@@ -74,18 +102,6 @@
 					{
 						if (do_color)
 						{
-							switch (this.color)
-							{
-								case Colors.Blue:
-									this.color = Colors.Red;
-								break;
-								case Colors.Green:
-									this.color = Colors.Blue;
-								break;
-								case Colors.Red:
-								default:
-									this.color = Colors.Green;
-							}
 						}
 						this.element.setAttribute('style', 'width: ' + this.cur_size + 'px; height: ' + this.cur_size + 'px; background-color: ' + this.color.name + ';');
 					}
